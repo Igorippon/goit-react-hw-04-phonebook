@@ -15,18 +15,14 @@ export const App = () => {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ]
   });
-  const [filter, setFilter] = useState('');
-
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts))
   }, [contacts]);
 
-
-
   const addContact = newContact => {
     const contactName = contacts.some(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
-    console.log(newContact)
     if (contactName) {
       alert(`${newContact.name} is already contacts.`)
       return
@@ -36,32 +32,17 @@ export const App = () => {
     );
   };
 
-  console.log(contacts);
-
   const deleteContact = contactId => {
-    console.log(contactId);
-    // const contact = contacts.filter((item) => item.id !== contactId)
-    setContacts(
-      [contacts.filter(contact => contact.id !== contactId)])
-    // console.log(contact);
-    // )
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId))
   };
-
-  console.log(contacts);
 
   const handleChange = evt => {
-    const { name, value } = evt.currentTarget
-    setFilter({ [name]: value })
+    const { value } = evt.currentTarget;
+    setFilter(value);
   };
 
-  console.log(filter);
-
-  const getVisibilContact = () => {
-
-    return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
-  };
-  const visibilContact = getVisibilContact();
-  console.log(visibilContact);
+  const visibilContact = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <Layuot>
