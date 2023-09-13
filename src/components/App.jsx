@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GlobalStyle } from "./GlobalStyle";
 import { Layuot } from "./Layout";
 import { nanoid } from 'nanoid';
@@ -46,7 +46,7 @@ export const App = () => {
     setFilter(value);
   };
 
-  const visibilContact = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
+  const visibilContact = useMemo(() => { return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase())); }, [contacts, filter]);
 
   return (
     <Layuot>
